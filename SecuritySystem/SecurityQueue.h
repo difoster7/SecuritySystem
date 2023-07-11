@@ -15,8 +15,8 @@ private:
 
 public:
 	void tic();
-	void enqueue(Passenger* passenger);
-	Passenger* dequeue();
+	void enqueue(Passenger passenger);
+	Passenger dequeue();
 	void reset();
 	float getAverageWait() const;
 	int getPassengersServiced() const;

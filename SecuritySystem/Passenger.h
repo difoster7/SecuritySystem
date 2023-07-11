@@ -17,7 +17,7 @@ public:
 	Passenger();
 	Passenger(string firstName, string lastName) : firstName(firstName), lastName(lastName), waiting(0) {};
 	void tic();
-	int getWaitTime() const;
+	int getWaitingTime() const;
 	string getFirstName() const;
 	string getLastName() const;
 	friend ostream& operator<<(ostream& os, const Passenger &pass);
