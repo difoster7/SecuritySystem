@@ -37,6 +37,7 @@ Passenger SecurityQueue::dequeue()
 void SecurityQueue::reset()
 {
     this->passengersServiced = 0;
+    this->averageWait = 0;
 }
 
 float SecurityQueue::getAverageWait() const

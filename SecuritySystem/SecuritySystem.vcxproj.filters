@@ -21,6 +21,9 @@
     <ClInclude Include="SecurityQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SecurityStation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Passenger.cpp">
@@ -30,6 +33,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SecurityQueue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SecurityStation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
