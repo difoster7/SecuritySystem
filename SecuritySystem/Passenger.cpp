@@ -10,7 +10,7 @@ void Passenger::generateFirstName()
 	string name = "default";
 
 	switch (rand() % 20) {
-	case 0: name = "wade"; break;
+	case 0: name = "Wade"; break;
 	case 1: name = "Dave"; break;
 	case 2: name = "Seth"; break;
 	case 3: name = "Ivan"; break;
