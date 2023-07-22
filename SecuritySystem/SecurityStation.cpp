@@ -20,6 +20,7 @@ void SecurityStation::tic()
 
 void SecurityStation::setPassenger(Passenger passenger)
 {
+	passenger.resetWait();
 	this->passenger = passenger;
 }
 

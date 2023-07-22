@@ -19,6 +19,7 @@ void SecurityQueue::tic()
 
 void SecurityQueue::enqueue(Passenger passenger)
 {
+    passenger.resetWait();
     this->passengerQueue.push(passenger);
 }
 
