@@ -17,6 +17,7 @@ public:
 	Passenger();
 	Passenger(string firstName, string lastName) : firstName(firstName), lastName(lastName), waiting(0) {};
 	void tic();
+	void resetWait();
 	int getWaitingTime() const;
 	string getFirstName() const;
 	string getLastName() const;

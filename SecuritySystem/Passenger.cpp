@@ -77,6 +77,11 @@ void Passenger::tic()
 	this->waiting++;
 }
 
+void Passenger::resetWait()
+{
+	this->waiting = 0;
+}
+
 int Passenger::getWaitingTime() const
 {
 	return this->waiting;
