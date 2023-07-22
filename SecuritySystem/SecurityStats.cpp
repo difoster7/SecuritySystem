@@ -1,4 +1,7 @@
 #include "SecurityStats.h"
+#include <string>
+#include <sstream>
+#include <iomanip>
 
 // PRECONDITION: daysTracked has already been incremented
 float SecurityStats::calculateNewAverage(float num1, float num2, int numNewDays)
@@ -65,4 +68,22 @@ float SecurityStats::getScanStationTime() const
 int SecurityStats::getDaysTracked() const
 {
     return this->daysTracked;
+}
+
+std::string SecurityStats::convertToMinutes(int seconds)
+{
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(2) << seconds / 60;
+    return ss.str();
+}
+
+std::ostream& operator<<(std::ostream& os, const SecurityStats& ss)
+{
+    os << "Total passengers served: " << ss.passengersServiced << std::endl;
+    os << "Average passengers served each day: " << ss.passengersServiced / ss.daysTracked << std::endl;
+    os << "Average total time (minutes): " << SecurityStats::convertToMinutes(ss.getTotalTime()) << std::endl;
+    os << "Average time spend in queues (minutes): " << SecurityStats::convertToMinutes(ss.getCredQueueTime() 
+        + ss.getScanQueueTime()) << std::endl;
+    os << "Average stage one time (minutes): " << SecurityStats::convertToMinutes(ss.getStage1Time()) << std::endl;
+    os << "Average stage two time (minutes): " << SecurityStats::convertToMinutes(ss.getStage2Time()) << std::endl;
 }

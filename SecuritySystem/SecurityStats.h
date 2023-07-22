@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+
 class SecurityStats
 {
 private:
@@ -23,5 +25,9 @@ public:
 	float getScanQueueTime() const;
 	float getScanStationTime() const;
 	int getDaysTracked() const;
+
+	static std::string convertToMinutes(int seconds);
+
+	friend std::ostream& operator<<(std::ostream& os, const SecurityStats& ss);
 };
 
