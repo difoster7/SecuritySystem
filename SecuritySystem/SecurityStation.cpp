@@ -6,6 +6,23 @@ void SecurityStation::calculateNextWait()
 	this->currentWait = 30;
 }
 
+// initializes member variable (constructor helper function)
+void SecurityStation::init()
+{
+	this->averageWaitTheoretical = 0;
+	this->currentTime = 0;
+	this->passengersServiced = 0;
+	this->averageWaitActual = 0;
+	this->currentWait = 0;
+	this->passengerDone = true;
+}
+
+SecurityStation::SecurityStation()
+{
+	this->averageWaitTheoretical = -1;
+	init();
+}
+
 // tics current time and current passengers time
 // if current time is greater than or equal to the current wait, 
 // marks the passenger as done
@@ -21,7 +38,14 @@ void SecurityStation::tic()
 void SecurityStation::setPassenger(Passenger passenger)
 {
 	passenger.resetWait();
+	this->passengerDone = false;
 	this->passenger = passenger;
+	calculateNextWait();
+}
+
+void SecurityStation::setAverageWaitTime(int averageWait)
+{
+	this->averageWaitActual = averageWait;
 }
 
 void SecurityStation::reset()
@@ -30,27 +54,9 @@ void SecurityStation::reset()
 	this->passengersServiced = 0;
 }
 
-bool SecurityStation::isEmpty() const
-{
-	return this->empty;
-}
-
-// returns the current passenger without marking the security center as empty
-// PRECONDITION: Security Station is not empty
 Passenger SecurityStation::getPassenger() const
 {
 	return this->passenger;
-}
-
-// returns the current passenger and marks the security center as empty
-// PRECONDITION: Security Station is not empty
-Passenger SecurityStation::retrievePassenger()
-{
-	this->empty = true;
-	this->passengerDone = false;
-	calculateNextWait();
-
-	return getPassenger();
 }
 
 int SecurityStation::getPassengersServiced() const

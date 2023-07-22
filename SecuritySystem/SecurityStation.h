@@ -5,23 +5,24 @@ class SecurityStation
 {
 private:
 	Passenger passenger;
-	int averageWaitTimeTheoretical;
+	int averageWaitTheoretical;
 	int currentTime;
 	int passengersServiced;
 	float averageWaitActual;
-	bool empty;
 	int currentWait;
 	bool passengerDone;
 
 	void calculateNextWait();
+	void init();
 
 public:
+	SecurityStation();
+	SecurityStation(int averageWait) : averageWaitTheoretical(averageWait) { init(); };
 	void tic();
 	void setPassenger(Passenger passenger);
+	void setAverageWaitTime(int averageWait);
 	void reset();
-	bool isEmpty() const;
 	Passenger getPassenger() const;
-	Passenger retrievePassenger();
 	int getPassengersServiced() const;
 	float getAverageWaitTime() const;
 };
