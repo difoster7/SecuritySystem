@@ -11,6 +11,7 @@ private:
 	float averageWaitActual;
 	int currentWait;
 	bool passengerDone;
+	bool empty;
 
 	void calculateNextWait();
 	void init();
@@ -22,8 +23,10 @@ public:
 	void setPassenger(Passenger passenger);
 	void setAverageWaitTime(int averageWait);
 	void reset();
-	Passenger getPassenger() const;
+	Passenger getPassenger();
 	int getPassengersServiced() const;
 	float getAverageWaitTime() const;
+	bool getPassengerDone() const;
+	bool isEmpty() const;
 };
 

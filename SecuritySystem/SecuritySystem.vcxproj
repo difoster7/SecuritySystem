@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Passenger.h" />
     <ClInclude Include="SecurityQueue.h" />
+    <ClInclude Include="SecuritySimulation.h" />
     <ClInclude Include="SecurityStation.h" />
     <ClInclude Include="SecurityStats.h" />
   </ItemGroup>
@@ -136,6 +137,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Passenger.cpp" />
     <ClCompile Include="SecurityQueue.cpp" />
+    <ClCompile Include="SecuritySimulation.cpp" />
     <ClCompile Include="SecurityStation.cpp" />
     <ClCompile Include="SecurityStats.cpp" />
   </ItemGroup>

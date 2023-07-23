@@ -15,11 +15,18 @@ void SecurityStation::init()
 	this->averageWaitActual = 0;
 	this->currentWait = 0;
 	this->passengerDone = true;
+	this->empty = true;
 }
 
-SecurityStation::SecurityStation()
+// default constructor
+// averageWaitTheoretical set to -1 to indicate it has not been set yet
+SecurityStation::SecurityStation() : averageWaitTheoretical (-1)
 {
-	this->averageWaitTheoretical = -1;
+	init();
+}
+
+SecurityStation::SecurityStation(int averageWait) : averageWaitTheoretical (averageWait)
+{
 	init();
 }
 
@@ -39,6 +46,7 @@ void SecurityStation::setPassenger(Passenger passenger)
 {
 	passenger.resetWait();
 	this->passengerDone = false;
+	this->empty = false;
 	this->passenger = passenger;
 	calculateNextWait();
 }
@@ -54,9 +62,15 @@ void SecurityStation::reset()
 	this->passengersServiced = 0;
 }
 
-Passenger SecurityStation::getPassenger() const
+Passenger SecurityStation::getPassenger()
 {
+	this->empty = true;
 	return this->passenger;
+}
+
+bool SecurityStation::getPassengerDone() const
+{
+	return this->passengerDone;
 }
 
 int SecurityStation::getPassengersServiced() const
@@ -67,4 +81,9 @@ int SecurityStation::getPassengersServiced() const
 float SecurityStation::getAverageWaitTime() const
 {
 	return this->averageWaitActual;
+}
+
+bool SecurityStation::isEmpty() const
+{
+	return this->empty;
 }
