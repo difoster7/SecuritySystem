@@ -79,6 +79,7 @@ std::string SecurityStats::convertToMinutes(int seconds)
 
 std::ostream& operator<<(std::ostream& os, const SecurityStats& ss)
 {
+    os << "Days simulated: " << ss.daysTracked << std::endl;
     os << "Total passengers served: " << ss.passengersServiced << std::endl;
     os << "Average passengers served each day: " << ss.passengersServiced / ss.daysTracked << std::endl;
     os << "Average total time (minutes): " << SecurityStats::convertToMinutes(ss.getTotalTime()) << std::endl;
@@ -86,4 +87,6 @@ std::ostream& operator<<(std::ostream& os, const SecurityStats& ss)
         + ss.getScanQueueTime()) << std::endl;
     os << "Average stage one time (minutes): " << SecurityStats::convertToMinutes(ss.getStage1Time()) << std::endl;
     os << "Average stage two time (minutes): " << SecurityStats::convertToMinutes(ss.getStage2Time()) << std::endl;
+
+    return os;
 }
