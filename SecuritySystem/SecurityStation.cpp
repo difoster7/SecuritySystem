@@ -3,29 +3,37 @@
 void SecurityStation::calculateNextWait()
 {
 	//TODO: update this with exponential function
-	this->currentWait = 30;
+	this->currentWait = this->expoRandNums(this->e);
 }
 
 // initializes member variable (constructor helper function)
 void SecurityStation::init()
 {
-	this->averageWaitTheoretical = 0;
+	this->averageCheckTime = 0;
 	this->currentTime = 0;
 	this->passengersServiced = 0;
 	this->averageWaitActual = 0;
 	this->currentWait = 0;
 	this->passengerDone = true;
 	this->empty = true;
+
+	random_device seeder;
+	const auto seed = seeder.entropy() ? seeder() : time(nullptr);
+	default_random_engine e2(seed);
+	this->e = e2;
+
+	exponential_distribution<> expoRandNums2(1 / this->averageCheckTime);
+	this->expoRandNums = expoRandNums2;
 }
 
 // default constructor
 // averageWaitTheoretical set to -1 to indicate it has not been set yet
-SecurityStation::SecurityStation() : averageWaitTheoretical (-1)
+SecurityStation::SecurityStation() : averageCheckTime(-1)
 {
 	init();
 }
 
-SecurityStation::SecurityStation(int averageWait) : averageWaitTheoretical (averageWait)
+SecurityStation::SecurityStation(int averageCheckTime) : averageCheckTime(averageCheckTime)
 {
 	init();
 }

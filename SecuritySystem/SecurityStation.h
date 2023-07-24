@@ -1,24 +1,29 @@
 #pragma once
+
+#include <random>
 #include "Passenger.h"
+
 
 class SecurityStation
 {
 private:
 	Passenger passenger;
-	int averageWaitTheoretical;
-	int currentTime;
+	int averageCheckTime;	// average number of seconds it takes for a passenger to pass through the station
+	int currentTime;	// seconds
 	int passengersServiced;
 	float averageWaitActual;
 	int currentWait;
 	bool passengerDone;
 	bool empty;
+	default_random_engine e;
+	exponential_distribution<> expoRandNums;
 
 	void calculateNextWait();
 	void init();
 
 public:
 	SecurityStation();
-	SecurityStation(int averageWait) : averageWaitTheoretical(averageWait) { init(); };
+	SecurityStation(int averageCheckTime) : averageCheckTime(averageCheckTime) { init(); };
 	void tic();
 	void setPassenger(Passenger passenger);
 	void setAverageWaitTime(int averageWait);

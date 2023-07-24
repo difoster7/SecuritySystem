@@ -81,8 +81,8 @@ void SecuritySimulation::setArrivalRate(int arrivalRate)
 // lengthOfDay is the number of hours in a day simulation
 SecuritySimulation::SecuritySimulation(int arrivalRate = 90, int lengthOfDay = 20) : 
     currentTime (0), arrivalRate (arrivalRate), lengthOfDay (lengthOfDay), passengersServiced (0),
-    dailyStats {}, credentialQueue (SecurityQueue()), credentialsStation (SecurityStation()), expoRandNums (arrivalRate),
-    scanningQueue (SecurityQueue()), scanningStations{ SecurityStation() , SecurityStation() ,  SecurityStation() ,  SecurityStation() }
+    dailyStats {}, credentialQueue (SecurityQueue()), credentialsStation (SecurityStation(30)), expoRandNums (arrivalRate),
+    scanningQueue (SecurityQueue(150)), scanningStations{ SecurityStation() , SecurityStation() ,  SecurityStation() ,  SecurityStation() }
 {
     random_device seeder;
     const auto seed = seeder.entropy() ? seeder() : time(nullptr);
