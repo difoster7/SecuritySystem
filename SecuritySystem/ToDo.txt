@@ -1,0 +1,6 @@
+Change all lists to vectors
+Use Array<> template
+
+Fix getStats to return one stat summing all the others
+
+Main.cpp
