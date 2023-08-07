@@ -147,7 +147,7 @@ bool SecuritySimulation::allStationsEmpty()
 SecurityStats SecuritySimulation::getStats()
 {
     SecurityStats returnStats;
-    for (auto stats : this->dailyStats) {
+    for (auto& const stats : this->dailyStats) {
         returnStats.addStats(stats);
     }
     return returnStats;

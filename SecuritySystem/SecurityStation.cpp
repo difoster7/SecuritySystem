@@ -11,26 +11,14 @@ void SecurityStation::calculateNextWait()
 	this->averageWaitActual = (this->averageWaitActual * this->passengersServiced + wait) / (this->passengersServiced + 1);
 }
 
-// initializes member variable (constructor helper function)
-void SecurityStation::init()
+SecurityStation::SecurityStation(int averageCheckTime) : averageCheckTime(averageCheckTime), currentTime (0),
+	passengersServiced (0), averageWaitActual (0), currentWait (0), passengerDone (true), empty(true)
 {
-	this->currentTime = 0;
-	this->passengersServiced = 0;
-	this->averageWaitActual = 0;
-	this->currentWait = 0;
-	this->passengerDone = true;
-	this->empty = true;
-	
 	random_device seeder;
 	const auto seed = seeder.entropy() ? seeder() : time(nullptr);
 	this->e = default_random_engine(seed);
-	
-	this->expoRandNums = exponential_distribution<> (1 / (double)this->averageCheckTime);
-}
 
-SecurityStation::SecurityStation(int averageCheckTime) : averageCheckTime(averageCheckTime)
-{
-	init();
+	this->expoRandNums = exponential_distribution<>(1 / (double)this->averageCheckTime);
 }
 
 // tics current time and current passengers time

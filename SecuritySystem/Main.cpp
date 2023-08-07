@@ -24,7 +24,7 @@ int main()
 
 	cout << "Passengers serviced in one hour: " << foo.getPassengersServiced() << endl;
 	cout << "Average minutes per passenger: " << (60*5) / (double)foo.getPassengersServiced() << endl;
-	cout << "Average minutes per passenger: " << foo.getAverageWaitTime() / 60 << endl;
+	cout << "Average minutes per passenger: " << foo.getAverageWaitTime()  << endl;
 
 
 	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
