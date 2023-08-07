@@ -11,8 +11,8 @@ private:
 	int averageCheckTime;	// average number of seconds it takes for a passenger to pass through the station
 	int currentTime;	// seconds
 	int passengersServiced;
-	float averageWaitActual;
-	int currentWait;
+	double averageWaitActual;
+	double currentWait;
 	bool passengerDone;
 	bool empty;
 	default_random_engine e;
@@ -22,15 +22,13 @@ private:
 	void init();
 
 public:
-	SecurityStation();
-	SecurityStation(int averageCheckTime) : averageCheckTime(averageCheckTime) { init(); };
+	SecurityStation(int averageCheckTime);
 	void tic();
 	void setPassenger(Passenger passenger);
-	void setAverageWaitTime(int averageWait);
 	void reset();
 	Passenger getPassenger();
 	int getPassengersServiced() const;
-	float getAverageWaitTime() const;
+	double getAverageWaitTime() const;
 	bool getPassengerDone() const;
 	bool isEmpty() const;
 };

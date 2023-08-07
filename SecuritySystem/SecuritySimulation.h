@@ -1,6 +1,6 @@
 #pragma once
 
-#include <list>;
+#include <vector>;
 #include <random>;
 
 #include "Passenger.h";
@@ -18,11 +18,11 @@ private:
 	int arrivalRate;	// passengersPerHour
 	int lengthOfDay;	// hours
 	int passengersServiced;
-	list<SecurityStats> dailyStats;
+	vector<SecurityStats> dailyStats;
 	SecurityQueue credentialQueue;
 	SecurityStation credentialsStation;
 	SecurityQueue scanningQueue;
-	SecurityStation scanningStations[4];
+	vector<SecurityStation> scanningStations;
 	default_random_engine e;
 	exponential_distribution<> expoRandNums;
 
@@ -34,7 +34,7 @@ private:
 	void updateStats();
 
 public:
-	SecuritySimulation(int arrivalRate, int lengthOfDay);
+	SecuritySimulation(int arrivalRate = 90, int lengthOfDay = 20);
 	void setArrivalRate(int arrivalRate);
 	void setLengthOfDay(int hours);
 	void simulateDay();

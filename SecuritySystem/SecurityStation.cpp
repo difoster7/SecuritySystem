@@ -1,36 +1,31 @@
 #include "SecurityStation.h"
+#include <iostream>;
 
 void SecurityStation::calculateNextWait()
 {
-	//TODO: update this with exponential function
-	this->currentWait = this->expoRandNums(this->e);
+	// update time next passenger is done
+	double wait = this->expoRandNums(this->e);
+	this->currentWait = this->currentTime + wait;
+
+	// update average wait
+	this->averageWaitActual = (this->averageWaitActual * this->passengersServiced + wait) / (this->passengersServiced + 1);
 }
 
 // initializes member variable (constructor helper function)
 void SecurityStation::init()
 {
-	this->averageCheckTime = 0;
 	this->currentTime = 0;
 	this->passengersServiced = 0;
 	this->averageWaitActual = 0;
 	this->currentWait = 0;
 	this->passengerDone = true;
 	this->empty = true;
-
+	
 	random_device seeder;
 	const auto seed = seeder.entropy() ? seeder() : time(nullptr);
-	default_random_engine e2(seed);
-	this->e = e2;
-
-	exponential_distribution<> expoRandNums2(1 / this->averageCheckTime);
-	this->expoRandNums = expoRandNums2;
-}
-
-// default constructor
-// averageWaitTheoretical set to -1 to indicate it has not been set yet
-SecurityStation::SecurityStation() : averageCheckTime(-1)
-{
-	init();
+	this->e = default_random_engine(seed);
+	
+	this->expoRandNums = exponential_distribution<> (1 / (double)this->averageCheckTime);
 }
 
 SecurityStation::SecurityStation(int averageCheckTime) : averageCheckTime(averageCheckTime)
@@ -50,6 +45,7 @@ void SecurityStation::tic()
 	}
 }
 
+// Precondition: Security Station is currently empty
 void SecurityStation::setPassenger(Passenger passenger)
 {
 	passenger.resetWait();
@@ -59,10 +55,6 @@ void SecurityStation::setPassenger(Passenger passenger)
 	calculateNextWait();
 }
 
-void SecurityStation::setAverageWaitTime(int averageWait)
-{
-	this->averageWaitActual = averageWait;
-}
 
 void SecurityStation::reset()
 {
@@ -70,9 +62,11 @@ void SecurityStation::reset()
 	this->passengersServiced = 0;
 }
 
+// Precondition: Security Station currently contains a passenger marked as Done
 Passenger SecurityStation::getPassenger()
 {
 	this->empty = true;
+	this->passengersServiced++;
 	return this->passenger;
 }
 
@@ -86,7 +80,7 @@ int SecurityStation::getPassengersServiced() const
 	return this->passengersServiced;
 }
 
-float SecurityStation::getAverageWaitTime() const
+double SecurityStation::getAverageWaitTime() const
 {
 	return this->averageWaitActual;
 }

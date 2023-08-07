@@ -79,10 +79,10 @@ void SecuritySimulation::setArrivalRate(int arrivalRate)
 
 // arrivalRate is the number of arrivals per hour
 // lengthOfDay is the number of hours in a day simulation
-SecuritySimulation::SecuritySimulation(int arrivalRate = 90, int lengthOfDay = 20) : 
+SecuritySimulation::SecuritySimulation(int arrivalRate, int lengthOfDay) : 
     currentTime (0), arrivalRate (arrivalRate), lengthOfDay (lengthOfDay), passengersServiced (0),
-    dailyStats {}, credentialQueue (SecurityQueue()), credentialsStation (SecurityStation(30)), expoRandNums (arrivalRate),
-    scanningQueue (SecurityQueue(150)), scanningStations{ SecurityStation() , SecurityStation() ,  SecurityStation() ,  SecurityStation() }
+    dailyStats (), credentialQueue (SecurityQueue()), credentialsStation (SecurityStation(30)), expoRandNums (arrivalRate),
+    scanningQueue (SecurityQueue()), scanningStations{ SecurityStation(150) , SecurityStation(150) ,  SecurityStation(150) ,  SecurityStation(150) }
 {
     random_device seeder;
     const auto seed = seeder.entropy() ? seeder() : time(nullptr);
@@ -92,6 +92,7 @@ SecuritySimulation::SecuritySimulation(int arrivalRate = 90, int lengthOfDay = 2
     genNextArrivalTime();
 
 }
+
 void SecuritySimulation::reset()
 {
     this->passengersServiced = 0;
@@ -115,7 +116,7 @@ void SecuritySimulation::updateStats()
     // create a security stat for the day
     SecurityStats dailyStat;
     dailyStat.addStats(this->passengersServiced, this->credentialQueue.getAverageWait(),
-        this->credentialsStation.getAverageWaitTime(), this->scanningQueue.getAverageWait(), aveScanStationWait, 1));
+        this->credentialsStation.getAverageWaitTime(), this->scanningQueue.getAverageWait(), aveScanStationWait, 1);
 
     // add todays stats to the list
     this->dailyStats.push_back(dailyStat);
@@ -142,8 +143,12 @@ bool SecuritySimulation::allStationsEmpty()
     return true;
 }
 
-
+// returns a summary of stats from all simulated days.
 SecurityStats SecuritySimulation::getStats()
 {
-    return this->dailyStats;
+    SecurityStats returnStats;
+    for (auto stats : this->dailyStats) {
+        returnStats.addStats(stats);
+    }
+    return returnStats;
 }
