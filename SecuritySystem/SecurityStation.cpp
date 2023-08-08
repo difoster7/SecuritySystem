@@ -1,5 +1,4 @@
 #include "SecurityStation.h"
-#include <iostream>;
 
 void SecurityStation::calculateNextWait()
 {

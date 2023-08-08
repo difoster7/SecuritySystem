@@ -14,9 +14,9 @@ class SecuritySimulation
 {
 private:	
 	int currentTime;	// seconds
-	int arrivalTime;	// seconds
-	int arrivalRate;	// passengersPerHour
-	int lengthOfDay;	// hours
+	double arrivalTime;	// seconds
+	double arrivalRate;	// passengersPerSecond
+	int lengthOfDay;	// seconds
 	int passengersServiced;
 	vector<SecurityStats> dailyStats;
 	SecurityQueue credentialQueue;
@@ -27,16 +27,15 @@ private:
 	exponential_distribution<> expoRandNums;
 
 	void tic();
-	bool newArrival();
 	void genNextArrivalTime();
 	bool allStationsEmpty();
 	void reset();
 	void updateStats();
 
 public:
-	SecuritySimulation(int arrivalRate = 90, int lengthOfDay = 20);
-	void setArrivalRate(int arrivalRate);
-	void setLengthOfDay(int hours);
+	SecuritySimulation(double arrivalsPerHour = 90, int hoursInDay = 20);
+	void setArrivalRate(double arrivalsPerHour);
+	void setLengthOfDay(double hours);
 	void simulateDay();
 	SecurityStats getStats();
 

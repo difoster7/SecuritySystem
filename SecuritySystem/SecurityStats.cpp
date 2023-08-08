@@ -3,6 +3,8 @@
 #include <sstream>
 #include <iomanip>
 
+using namespace std;
+
 // PRECONDITION: daysTracked has already been incremented
 float SecurityStats::calculateNewAverage(float num1, float num2, int numNewDays)
 {
@@ -73,7 +75,7 @@ int SecurityStats::getDaysTracked() const
 std::string SecurityStats::convertToMinutes(int seconds)
 {
     std::stringstream ss;
-    ss << std::fixed << std::setprecision(2) << seconds / 60;
+    ss << std::fixed << std::setprecision(1) << (double)seconds / 60;
     return ss.str();
 }
 
