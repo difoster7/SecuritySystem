@@ -19,7 +19,6 @@ private:
 	exponential_distribution<> expoRandNums;
 
 	void calculateNextWait();
-	void init();
 
 public:
 	SecurityStation(int averageCheckTime);
